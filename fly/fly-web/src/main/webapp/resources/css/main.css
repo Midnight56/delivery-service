@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css?family=Peralta|Sahitya|Spectral|Itim');
+
+body {
+	background-color: #c8f7f3;
+	font-family: "Peralta|Spectral";
+	font-weight: 300;
+	font-size: 16px;
+	color: #555;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Sahitya|Spectral";
+	font-weight: 300;
+	color: #2e2727;
+}
+
+
+
+a:hover, a:focus {
+	color: #7b7b7b;
+	text-decoration: none;
+	outline: 0;
+}
+
+.centered {
+	text-align: center;
+}
+
+/* hr{
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 1em 0;
+	padding: 0;
+} */
+
+.return {
+	margin-top: 100px;
+	margin-left: 20px;
+}
+
+.return > a {
+	font-size: 20px;
+}
+
+.navbar {
+	font-weight: 800;
+	font-size: 16px;
+	padding-top: 10px;
+	height: 70px;
+}
+
+.navbar-inverse {
+	background: #54635f;
+	border-color: #2d2d2d;
+	margin: 0;
+	width: 1600px;
+}
+
+.navbar-inverse .navbar-brand {
+	color: #c0eb42;
+	font-weight: bolder;
+	font-size: 22px;
+	margin-left: 40px;
+}
+
+.navbar-inverse a{
+	font-size: 18px;
+	color: #a6a6a6;
+}
+
+.navbar-inverse a:hover, a:focus {
+	color: #ffffff;
+	text-decoration: none;
+	outline: 0;
+}
+
+.navbar-inverse .navbar-nav {
+	margin-right: 20px;
+	height: 50px;
+}
+
+.navbar-inverse .navbar-nav .user-panel {
+	color: #f4c00b;
+	font-weight: bolder;
+	font-size: 22px;
+	margin-right: 200px;
+}
+
+.navbar-inverse .navbar-nav .admin-panel {
+	color: #f4c00b;
+	font-weight: bolder;
+	font-size: 22px;
+	margin-right: 300px;
+	width: 250px;
+}
+
+.navbar-inverse .navbar-nav .navbar-form .form-control {
+	width: 220px;
+	height: 30px;
+}
+
+.navbar-inverse .navbar-nav a{
+	font-size: 18px;
+	color: #a6a6a6;
+}
+
+.navbar-inverse .navbar-nav a:hover, a:focus {
+	color: #ffffff;
+	text-decoration: none;
+	outline: 0;
+}
+
+#headerwrap {
+	margin-top: 70px;
+	padding-top: 20px;
+	text-align: center;
+	background: url(../images/fon_gorod1.jpg);
+	background-attachment: relative;
+	background-position: center center;
+	min-height: 500px;
+	width: 100%;
+	
+	background-size: 100%;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+#headerwrap h1 {
+	font-family: "Itim";
+	margin-top:10px;
+	color: #314637;
+	font-size: 55px;
+	font-weight: 300;
+	letter-spacing: 2px;
+}
+
+#headerwrap h2 {
+	color: #314637;
+}
+
+.c h3{
+	text-align: center;
+	padding-right: 50px;
+	padding-top: 20px;
+	font-size: 28px;
+	font-weight: 400; 
+}
+
+.table {
+	text-align: center;
+	background-color: #d7e1de;
+	width: 85%;
+	
+}
+
+.table th {
+	text-align: center;
+	background-color: #b3c6bf;
+	font-size: 20px;
+}
+
+.table tr {
+	height: 50px;
+}
+
+.login_table {
+	border-collapse: collapse;
+    border: 1px solid black; 
+	position: fixed;
+ 	top: 50%;
+ 	left: 50%;
+	width: 450px;
+	height: 300px;
+	margin-left: -225px;
+	margin-top: -200px;
+}
+
+.login_table .button1 {
+	width: 200px;
+	background-color: #49b667;
+	color: #ffffff;
+	border-radius: 7px;
+}
+
+.l1 {
+	text-align: right;
+	padding-right: 5px;
+}
+
+#reg {
+	margin-top: 180px;
+}
+
+#reg h2 {
+	font-family: Peralta;
+	color: #0d591c;
+	font-weight: 300;
+}
+
+#reg > a {
+	font-family: Peralta;
+	font-size: 16px;
+	font-weight: 300;
+}
+
+.navbar-inverse .navbar-nav .dropdown {
+	background: #54635f;
+	margin-right: 30px;
+	margin-top: 10px;
+}
+
+.navbar-inverse .navbar-nav .dropdown .dropdown-menu > li > a:hover {
+	background-color: #0080ff;
+}
+
+.navbar-inverse .navbar-nav .justLogout {
+	margin-right: 40px;
+	font-size: 20px;
+	margin-bottom: 10px;]
+}
+
+.create-order-btn {
+	margin-left: 74px;
+	margin-bottom: 2px;
+}
+
+#new-ordertable {
+	position: absolute;
+	left: 50%;
+	width: 400px;
+	margin-top: 80px;
+	margin-left: -200px;
+}
+
+#new-ordertable .form-check {
+	margin-top: 8px;
+}
+
+#new-ordertable .form-check .form-check-input {
+	margin-left: 20px;
+}
+
+#newOrder_form_pack {
+	margin-left: 5px;
+}
+
+.error {
+    color: red
+}
+
+.admpage_admin_panel{
+	margin-top: 20px;
+}
+.admpage_admin_panel .nav-tabs {
+	width: 800px;
+	margin-left: 73px;
+}
+
+.admpage_admin_panel .nav-tabs > li > a {
+	font-size: 16px;
+}
+
+#registration_form {
+	margin-left: 33%;
+	margin-top: 50px;
+}
+
+#reg_customer_radio {
+	margin-left: 40px;
+}
+
+#reg_courier_radio {
+	margin-left: 100px;
+}
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.noname.labo</groupId>
+	<artifactId>fly</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>fly</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<jsp.version>2.0</jsp.version>
+        <jstl.version>1.2</jstl.version>
+		<spring.version>5.0.3.RELEASE</spring.version>
+		<spring.data.version>2.0.3.RELEASE</spring.data.version>
+		<spring.security.version>4.2.1.RELEASE</spring.security.version>
+		<hibernate.version>5.2.12.Final</hibernate.version>
+		<!-- <hibernate-validator.version>5.2.1.Final</hibernate-validator.version>
+		<validation-api.version>1.1.0.Final</validation-api.version> -->
+		<mysql.version>5.1.40</mysql.version>
+		<flyway.version>5.0.7</flyway.version>
+		<dozer.version>5.5.1</dozer.version>
+	</properties>
+
+	<modules>
+		<module>fly-web</module>
+		<module>fly-database</module>
+    	<module>fly-domain</module>
+    	<module>fly-dao</module>
+    	<module>fly-service</module>
+    	<module>fly-security</module>
+  </modules>
+</project>

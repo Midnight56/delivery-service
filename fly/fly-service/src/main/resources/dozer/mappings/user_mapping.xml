@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+      
+     <mapping>
+     	<class-a>org.noname.labo.fly.domain.User</class-a>
+     	<class-b>org.noname.labo.fly.beans.UserBean</class-b>
+     	
+    	<field custom-converter="org.noname.labo.fly.beanConverter.customconverters.OptionToIdConverter">
+    		<a>options</a>
+    		<b>optionId</b>
+    	</field>
+    	<field>
+    		<a>options.block</a>
+    		<b>block</b>
+    	</field>
+    	<field>
+    		<a>roleList</a>
+    		<b>roles</b>
+    	</field>		
+     </mapping> 
+</mappings>
