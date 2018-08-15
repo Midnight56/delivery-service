@@ -5,6 +5,7 @@ import org.noname.labo.fly.beans.UserBean;
 import org.noname.labo.fly.service.UserService;
 import org.noname.labo.fly.validators.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,9 @@ public class RegistrationController {
 	@Autowired
 	private UserValidator userValidator;
 	
+	@Autowired
+	BCryptPasswordEncoder bcryptEncoder;
+	
 	@RequestMapping(value="/registration", method = RequestMethod.GET)
 	public String registration(Model model) {
 		model.addAttribute("user", new UserBean());
@@ -33,6 +37,7 @@ public class RegistrationController {
 		if(result.hasErrors()) {
 			return "registration";
 		} else {
+			user.setPassword(bcryptEncoder.encode(user.getPassword()));
 			userService.saveNewUser(user);
 			return "successReg";
 		}	

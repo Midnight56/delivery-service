@@ -17,6 +17,7 @@ import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,18 +29,22 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 	@Autowired
 	private RoleService roleService;
 	
+	@Autowired
+	private BCryptPasswordEncoder bcryptEncoder;
+	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		LoggedAccountBean loggedUser = createLoggedAccount(authentication);
 		String password = (String) authentication.getCredentials();
-		if(!password.equals(loggedUser.getPassword())) {
-			throw new BadCredentialsException("Неправильный пароль");
-		}
 		if (!loggedUser.isAccountNonLocked()) {
 			throw new LockedException("Аккаунт заблокирован!", new Exception());
-		}
-
-		return new UsernamePasswordAuthenticationToken(loggedUser, password, loggedUser.getAuthorities());
+		} else {
+			if(bcryptEncoder.matches(password, loggedUser.getPassword())) {
+				return new UsernamePasswordAuthenticationToken(loggedUser, password, loggedUser.getAuthorities());
+			} else {
+				throw new BadCredentialsException(loggedUser.getUsername());
+			}
+		}	
 	}
 
 	@Override
@@ -75,4 +80,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 		}
 		return authorities;
 	}
+	
+	public void setBcryptEncoder(BCryptPasswordEncoder bcryptEncoder) {
+        this.bcryptEncoder = bcryptEncoder;
+    }
 }

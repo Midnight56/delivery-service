@@ -14,7 +14,7 @@
 		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/resources/**" access="permitAll" />
 		<intercept-url pattern="/admin/**" access="hasAuthority('admin')" />
-		<intercept-url pattern="/**" access="isAuthenticated()" />
+		<!-- <intercept-url pattern="/**" access="isAuthenticated()" /> -->
 		
 
 		<form-login login-page="/login" 
@@ -31,5 +31,10 @@
 	</authentication-manager>
 
 	<beans:bean id="customAuthenticationProvider"
-		class="org.noname.labo.fly.auth.CustomAuthenticationProvider" />
+		class="org.noname.labo.fly.auth.CustomAuthenticationProvider">
+		<beans:property name="bcryptEncoder" ref="passwordEncoder" />
+	</beans:bean>
+		
+	<beans:bean id="passwordEncoder" 
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 </beans:beans>
