@@ -3,6 +3,7 @@ package org.noname.labo.fly.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.noname.labo.fly.beans.OrderBean;
 import org.noname.labo.fly.beans.RoleBean;
 import org.noname.labo.fly.beans.UserBean;
@@ -22,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/orders")
 public class OrderController {
 	
+	private static final Logger logger = Logger.getLogger(OrderController.class);
+	
 	@Autowired
 	private RoleService roleService;
 
@@ -34,6 +37,7 @@ public class OrderController {
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String createOrderForm(Model model) {
 		model.addAttribute("newOrder", new OrderBean());
+		logger.info("page for opening new order loaded");
 		return "create_order";
 	}
 	
@@ -44,6 +48,7 @@ public class OrderController {
 		order.setEmployeeId(0);
 		order.setStatus(true);
 		orderService.saveOrder(order);
+		logger.info("new order created, details: " + order);
 		return new ModelAndView("redirect:/welcome");
 	}
 	
@@ -52,6 +57,7 @@ public class OrderController {
 		Integer id = securityService.getAccountId();
 		Iterable<OrderBean> orders = orderService.findOrdersByUserId(id);
 		model.addAttribute("orderList", orders);
+		logger.info("all orders for customer with id=" + id);
 		return "orders";
 	}
 	
@@ -60,6 +66,7 @@ public class OrderController {
 		Integer id = securityService.getAccountId();
 		Iterable<OrderBean> orders = orderService.findByEmployeeId(id);
 		model.addAttribute("orderList", orders);
+		logger.info("all orders for courier with id=" + id);
 		return "orders";
 	}
 	
@@ -69,6 +76,7 @@ public class OrderController {
 		OrderBean order = orderService.getOrderById(id);
 		order.setEmployeeId(emplId);
 		orderService.saveOrder(order);
+		logger.info("order with id=" + id + " accepted by courier with id=" + emplId);
 		return "redirect:/orders/courier/showOrders";
 	}
 	
@@ -78,6 +86,7 @@ public class OrderController {
 		order.setStatus(false);
 		orderService.saveOrder(order);
 		UserBean user = securityService.getAccount();
+		logger.info("order with id=" + id + " closed by user with id=" + user.getId() + " and name " + user.getName());
 		RoleBean roleCourier = roleService.getRoleByName("courier");
 		if (user.getRoles().contains(roleCourier)) {
 			return "redirect:/orders/courier/showOrders";
@@ -90,6 +99,7 @@ public class OrderController {
 		OrderBean order = orderService.getOrderById(id);
 		order.setEmployeeId(0);
 		orderService.saveOrder(order);
+		logger.info("order with id=" + id + " cancelled");
 		return new ModelAndView("redirect:/orders/courier/showOrders");
 	}
 
@@ -98,8 +108,7 @@ public class OrderController {
 		List<String> packingList = new ArrayList<>();
 		packingList.add("letter");
 		packingList.add("package");
-		packingList.add("box");
-		
+		packingList.add("box");		
 		return packingList;
 	}
 } 

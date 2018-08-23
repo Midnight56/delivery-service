@@ -1,6 +1,7 @@
 package org.noname.labo.fly.controllers;
 
 
+import org.apache.log4j.Logger;
 import org.noname.labo.fly.beans.OrderBean;
 import org.noname.labo.fly.beans.UserBean;
 import org.noname.labo.fly.service.OrderService;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController {
 	
+	private static final Logger logger = Logger.getLogger(MainController.class);
+	
 	@Autowired
 	private OrderService orderService;
 	
@@ -23,15 +26,15 @@ public class MainController {
 	
 	@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
 	public ModelAndView ApplicationEntry() {
-		System.out.println("Start Page loaded");
 		ModelAndView mav = new ModelAndView("startpage");
+		logger.info("Startpage loaded");
 		return mav;
 	}
 	
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public ModelAndView showHomePage() {
-		System.out.println("Start Page loaded");
 		ModelAndView mav = new ModelAndView("me");
+		logger.info("Welcome page loaded");
 		return mav;
 	}
 	

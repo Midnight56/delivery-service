@@ -15,7 +15,7 @@
 		<property name="basename" value="/validation/messages_en_US"/>
 	</bean>
 
-	<bean id = "mapper" class="org.dozer.spring.DozerBeanMapperFactoryBean">
+	<bean id="mapper" class="org.dozer.spring.DozerBeanMapperFactoryBean">
 		<property name="mappingFiles" value="classpath:/dozer/mappings/*_mapping.xml" />
 		
 		<property name="customConverters">
@@ -25,4 +25,8 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- <bean id="logger" class="org.apache.log4j.Logger">
+		<property name="logging" value="classpath:/logger/log4j.properties" />
+	</bean> -->
 </beans>

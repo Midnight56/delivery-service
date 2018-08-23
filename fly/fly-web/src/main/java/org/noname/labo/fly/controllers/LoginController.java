@@ -6,6 +6,7 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.noname.labo.fly.beans.UserBean;
 import org.noname.labo.fly.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 	
+	private static final Logger logger = Logger.getLogger(LoginController.class);
+	
 	@Autowired
 	private UserService userService;
 	
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loadLoginPage() {
-		System.out.println("this is Login Page");
+		logger.info("Login page loaded");
 		return "loginpage";
 	}
 	
@@ -36,23 +39,24 @@ public class LoginController {
 		if (auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-
+		logger.info("user " + auth.getName() + " is off.");
 		return "redirect:/login";
 	}
 	
 	// for 403 access denied page
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public ModelAndView accesssDenied(Principal user) {
-	ModelAndView model = new ModelAndView();
-	String name = user.getName();
-	UserBean bean = userService.findUserByName(name);
-	if (bean.isBlock()) {
-		model.addObject("msg", "Hi " + user.getName() + ", you do not have permission to access this page!");
-	} else {
-		model.addObject("msg", "You do not have permission to access this page!");
-	}
-	model.setViewName("403");
-	return model;
+		ModelAndView model = new ModelAndView();
+		String name = user.getName();
+		UserBean bean = userService.findUserByName(name);
+		if (bean.isBlock()) {
+			model.addObject("msg", "Hi " + user.getName() + ", you do not have permission to access this page!");
+		} else {
+			model.addObject("msg", "You have permission to access this page!");
+		}
+		model.setViewName("403");
+		logger.info("user " + user.getName() + "without necessary authorities tried to enter to the closed page");
+		return model;
 	}
 }
 

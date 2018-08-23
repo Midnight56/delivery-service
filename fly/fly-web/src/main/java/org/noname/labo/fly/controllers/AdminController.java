@@ -1,6 +1,7 @@
 package org.noname.labo.fly.controllers;
 
 
+import org.apache.log4j.Logger;
 import org.noname.labo.fly.beans.OrderBean;
 import org.noname.labo.fly.beans.RoleBean;
 import org.noname.labo.fly.beans.UserBean;
@@ -19,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
+	
+	private static final Logger logger = Logger.getLogger(AdminController.class);
 
 	@Autowired
 	private UserService userService;
@@ -35,6 +38,7 @@ public class AdminController {
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public String showAll(@ModelAttribute("userList") Iterable<UserBean> list, 
 								@ModelAttribute("orderList") Iterable<OrderBean> orderlist) {
+		logger.info("admin page loaded");
 		return "adminpage";
 	}
 	
@@ -46,6 +50,7 @@ public class AdminController {
 			UserBean user = userService.findUserById(id);
 			user.setBlock(true);
 			userService.updateUser(user);
+			logger.info("user " + user.getName() + " has been blocked");
 			return "redirect:/admin/show";
 		} else
 			return "redirect:/welcome";
@@ -59,6 +64,7 @@ public class AdminController {
 			UserBean user = userService.findUserById(id);
 			user.setBlock(false);
 			userService.updateUser(user);
+			logger.info("user " + user.getName() + " has been unblocked");
 			return "redirect:/admin/show";
 		} else
 			return "redirect:/welcome";
@@ -73,6 +79,7 @@ public class AdminController {
 			UserBean user = userService.findUserById(id);
 			user.addNewRole(role);
 			userService.updateUser(user);
+			logger.info("user " + user.getName() + " get admin's authorities");
 			return "redirect:/admin/show";
 		} else
 			return "redirect:/welcome";
@@ -86,6 +93,7 @@ public class AdminController {
 			UserBean user = userService.findUserById(id);
 			user.removeRole(role);
 			userService.updateUser(user);
+			logger.info("user " + user.getName() + " lost admin's authorities");
 			return "redirect:/admin/show";
 		} else
 			return "redirect:/welcome";
@@ -94,13 +102,18 @@ public class AdminController {
 	@RequestMapping(value = "/orders/{id}/close", method = RequestMethod.GET)
 	public ModelAndView closeOrder(@PathVariable("id") Integer id) {
 		UserBean currentUser = securityService.getAccount();
-		RoleBean role = roleService.getRoleByName("admin");
-		if (currentUser.getRoles().contains(role)) {
+		RoleBean admin = roleService.getRoleByName("admin");
+		if (currentUser.getRoles().contains(admin)) {
 			OrderBean order = orderService.getOrderById(id);
 			order.setStatus(false);
 			orderService.saveOrder(order);
-		}
-		return new ModelAndView("redirect:/admin/show");
+			logger.info("order with id " + id + " closed");
+			return new ModelAndView("redirect:/admin/show");
+		} else {
+			ModelAndView mav = new ModelAndView("403");
+			mav.addObject("msg", "You can't do this");
+			return mav;
+		}	
 	}
 	
 	@ModelAttribute(name = "userList")
