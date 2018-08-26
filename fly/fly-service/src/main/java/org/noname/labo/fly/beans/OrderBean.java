@@ -9,7 +9,7 @@ public class OrderBean {
 	
 	private String deliveryAddress;
 	
-	//true - active; false - closed
+	//true = active order; false = closed order
 	private Boolean status;
 	
 	private String packingType;

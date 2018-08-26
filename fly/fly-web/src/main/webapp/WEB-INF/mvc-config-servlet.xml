@@ -9,6 +9,7 @@
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<context:component-scan base-package="org.noname.labo.fly.controllers"/>
+	<context:component-scan base-package="org.noname.labo.fly.api"/>
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
