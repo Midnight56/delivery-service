@@ -50,7 +50,11 @@ public class UserServiceImpl implements UserService{
 	public UserBean findUserByName(String name) {
 		User user = userDao.findByName(name);
 		UserBean bean = converter.convertToBean(user, UserBean.class);
-		logger.info("user by name " + name + " loaded successfully, details: id=" + bean.getId());
+		if (bean != null) {
+			logger.info("user by name " + name + " loaded successfully, details: id=" + bean.getId());
+		} else {
+			logger.info("There is no user with name " + name);
+		}
 		return bean;
 	}
 
